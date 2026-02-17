@@ -34,3 +34,4 @@ server/service-account.json
 
 # Vercel
 .vercel
+components/json/*.json
