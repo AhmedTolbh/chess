@@ -54,7 +54,7 @@ const COUNTRIES: CountryData[] = [
     { name: "South Africa", dial_code: "27", code: "ZA", flag: "🇿🇦" },
 ];
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://chess-production-3b4a.up.railway.app';
 
 const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, isDarkMode, lang, preselectedPlan }) => {
     const t = translations[lang].registration;
@@ -197,15 +197,15 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
     if (!isOpen) return null;
 
     const inputClasses = `w-full px-4 py-3.5 rounded-xl border-2 transition-all duration-300 outline-none text-base ${isDarkMode
-            ? 'bg-white/5 border-white/10 text-white placeholder-slate-500 focus:border-lime-500 focus:bg-white/10'
-            : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 focus:border-lime-500 focus:bg-lime-50/30'
+        ? 'bg-white/5 border-white/10 text-white placeholder-slate-500 focus:border-lime-500 focus:bg-white/10'
+        : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 focus:border-lime-500 focus:bg-lime-50/30'
         }`;
 
     const labelClasses = `block text-sm font-bold mb-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`;
 
     const selectClasses = `w-full px-4 py-3.5 rounded-xl border-2 transition-all duration-300 outline-none text-base appearance-none cursor-pointer ${isDarkMode
-            ? 'bg-white/5 border-white/10 text-white focus:border-lime-500 focus:bg-white/10'
-            : 'bg-white border-slate-200 text-slate-900 focus:border-lime-500 focus:bg-lime-50/30'
+        ? 'bg-white/5 border-white/10 text-white focus:border-lime-500 focus:bg-white/10'
+        : 'bg-white border-slate-200 text-slate-900 focus:border-lime-500 focus:bg-lime-50/30'
         }`;
 
     // Success state
@@ -380,8 +380,8 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
                                     type="button"
                                     onClick={() => setShowCountryDropdown(!showCountryDropdown)}
                                     className={`w-full flex items-center gap-2 px-3 py-3.5 rounded-xl border-2 transition-all duration-300 text-base ${isDarkMode
-                                            ? 'bg-white/5 border-white/10 text-white hover:border-lime-500'
-                                            : 'bg-white border-slate-200 text-slate-900 hover:border-lime-500'
+                                        ? 'bg-white/5 border-white/10 text-white hover:border-lime-500'
+                                        : 'bg-white border-slate-200 text-slate-900 hover:border-lime-500'
                                         }`}
                                 >
                                     <span className="text-lg">{selectedCountry.flag}</span>
@@ -418,8 +418,8 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
                                                         setCountrySearch('');
                                                     }}
                                                     className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-all ${selectedCountry.code === country.code
-                                                            ? 'bg-lime-500/10 text-lime-500'
-                                                            : isDarkMode ? 'text-slate-300 hover:bg-white/5' : 'text-slate-700 hover:bg-slate-50'
+                                                        ? 'bg-lime-500/10 text-lime-500'
+                                                        : isDarkMode ? 'text-slate-300 hover:bg-white/5' : 'text-slate-700 hover:bg-slate-50'
                                                         }`}
                                                 >
                                                     <span className="text-lg">{country.flag}</span>
