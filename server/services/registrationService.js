@@ -1,5 +1,6 @@
 const { google } = require('googleapis');
 const path = require('path');
+const fs = require('fs');
 
 class RegistrationService {
     constructor() {
@@ -10,10 +11,31 @@ class RegistrationService {
 
     async _init() {
         try {
-            const auth = new google.auth.GoogleAuth({
-                keyFile: path.join(__dirname, '..', 'service-account.json'),
-                scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-            });
+            let auth;
+
+            // Option 1: Read from environment variable (Railway / production)
+            if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+                const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+                auth = new google.auth.GoogleAuth({
+                    credentials,
+                    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+                });
+                console.log('🔑 Using service account from environment variable');
+            }
+            // Option 2: Read from file (local development)
+            else {
+                const keyFilePath = path.join(__dirname, '..', 'service-account.json');
+                if (!fs.existsSync(keyFilePath)) {
+                    console.warn('⚠️  No service account found. Set GOOGLE_SERVICE_ACCOUNT_JSON env var or add service-account.json');
+                    return;
+                }
+                auth = new google.auth.GoogleAuth({
+                    keyFile: keyFilePath,
+                    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+                });
+                console.log('🔑 Using service account from file');
+            }
+
             const authClient = await auth.getClient();
             this.sheets = google.sheets({ version: 'v4', auth: authClient });
             console.log('✅ Google Sheets service initialized for registrations');
